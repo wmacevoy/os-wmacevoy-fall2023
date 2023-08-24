@@ -23,7 +23,7 @@ RUN chmod +x /tmp/install-vcpkg.sh \
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends time curl git dos2unix nodejs npm python3 python3-pip python-is-python3
+    && apt-get -y install --no-install-recommends time curl git dos2unix nodejs npm python3 python3-pip python3-pytest python-is-python3
 
 # [Optional] Uncomment this section to install additional OS packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -31,9 +31,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # error - externally managed environment...
 # RUN python3 -m pip install --upgrade setuptools
-
-RUN echo  export PATH='"'/app/bin:/app/bin/$(uname -s)-$(uname -m):/app/node_modules/.bin:/app:'${PATH}''"' >> /root/.bashrc
-RUN echo  export PATH='"'/app/bin:/app/bin/$(uname -s)-$(uname -m):/app/node_modules/.bin:/app:'${PATH}''"' >> /home/${USERNAME}/.bashrc
 
 ENTRYPOINT ["/bin/bash","-i","-c","\"$@\"","--"]
 
