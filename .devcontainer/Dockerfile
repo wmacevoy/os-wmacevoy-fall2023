@@ -29,7 +29,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends nano emacs-nox vim
 
-RUN python3 -m pip install --upgrade setuptools
+# error - externally managed environment...
+# RUN python3 -m pip install --upgrade setuptools
 
 RUN echo  export PATH='"'/app/bin:/app/bin/$(uname -s)-$(uname -m):/app/node_modules/.bin:/app:'${PATH}''"' >> /root/.bashrc
 RUN echo  export PATH='"'/app/bin:/app/bin/$(uname -s)-$(uname -m):/app/node_modules/.bin:/app:'${PATH}''"' >> /home/${USERNAME}/.bashrc
