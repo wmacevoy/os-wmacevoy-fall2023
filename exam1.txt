@@ -1,0 +1,80 @@
+What is an operating system?
+
+1. Resource Manager.
+2. Abstraction Layer.
+3. Virtualalization Layer.
+4. Identity & Access Manager.
+
+What are the principle resources that are managed by an operating system?
+
+1. Processor
+2. Memory
+3. Storage
+4  I/O
+
+What are the principle abstractions in an operaing sytem?
+
+1. Process [fund. memory abstraction]
+2. Thread [fund. cpu abstraction]
+
+... 3. File System [storage abstraction]
+... 4. User & Groups [identity & access]
+
+What are the principle virtualzations?
+
+See abstractions.
+
+
+Q. When is having an operating system a bad idea?
+
+A. Very low level devices where the developers "own" everything and the application is
+simple.
+
+Q. What is the difference between a program and a process?
+
+A. A program is a description of how an application runs (.exe in windows).  The actual running
+of that program using resources on a machine is as a process.
+
+Q. When are threads a good idea?
+
+A. When you want to share the same resources of a process between multiple actors (threads).
+
+Q. How do you start additional threads?
+
+A. Withing the same process, there is an API.  C++ has a std::thread class which manages
+them. Many operating systems use the pthread library.
+
+Q. How do you start additional processes?
+
+Posix systems use fork().  This splits the current process into two.  Often one of the
+new processes changes personality with an exec() soon after.
+
+Q. What are two reference scheduling algorithms for running threads?
+
+Round robin, priority scheduling, shortest job first.  SJF is impossible because you cannnot
+know ahead of time which job will be shortest.  Real scheduling mixes all these.
+
+Q. What is the purpose of a mutex?
+
+A mutex is a access control for the CPU.  Only 1 core at a time can own a mutex.
+
+Its purpose is to safely modify shared resources by executing critical sections of
+code so that only one thread at a time can read/write them.
+
+For example, customers making orders should not modify the list of orders while a
+cook is removing an order to "prepare" it.
+
+Q. How does the kernel intervene on a process?  Similarly, how does a process ask the
+kernel to provide a service?
+
+Hardware and software interrupts.  A timer interrupt can allow a kernel to intervene
+on a process. Processes can call a software interrupt to ask the kernel to provide a
+service.
+
+Q. How does a kernel switch which threads/processes are running?
+
+Fundamentally, the register set of a core represents what it is doing.  By using a timer
+it can get in the way of a running process.  By looking at a table of saved states it can
+choose what thread in which process runs next.  This is pulled off with a yeild() idea,
+which is weird like fork() because it does not have to return in the same thread or
+process.
