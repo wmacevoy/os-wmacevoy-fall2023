@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdint.h>
 #include <array>
+#include <cstring>
 
 template <uint64_t SIZE>
 struct Message {
@@ -14,7 +15,7 @@ struct Message {
   
   Message() : state(STATE_INIT), to(0), length(0)
   {
-    memset(data,0,SIZE);
+    std::memset(data,0,SIZE);
   }
   ~Message() {
     state = STATE_INVALID;
@@ -25,7 +26,7 @@ struct Message {
     if ((state == STATE_INIT || state == STATE_RECEIVED) && _length <= SIZE) {
       to=_to;
       length=_length;
-      memcpy((void*) &data[0],&content[0],_length);
+      std::memcpy((void*) &data[0],&content[0],_length);
       state = STATE_READY;
       return true;
     }
@@ -35,7 +36,7 @@ struct Message {
   bool receive(uint32_t recipient, std::string &content) volatile {
     if (state == STATE_READY && to == recipient) {
       content.resize(length);
-      memcpy(&content[0],(void*) &data[0],length);
+      std::memcpy(&content[0],(void*) &data[0],length);
       state = STATE_RECEIVED;
       return true;
     }

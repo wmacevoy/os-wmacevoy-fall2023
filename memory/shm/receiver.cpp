@@ -1,5 +1,4 @@
 #include <iostream>
-#include <strstream>
 #include <string>
 
 #include <fcntl.h>
