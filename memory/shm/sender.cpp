@@ -25,7 +25,7 @@ int main() {
     // Configure the size of the shared memory object
     ftruncate(shm_fd, sizeof(Message4k));
     // Memory map the shared memory object
-    void *ptr = mmap(0, 1024, PROT_WRITE, MAP_SHARED, shm_fd, 0);
+    void *ptr = mmap(0, sizeof(Message4k), PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
     // build a Message4k object at this location
     volatile Message4k *message = new (ptr) Message4k();

@@ -21,7 +21,7 @@ int main() {
     }
     
     // Memory map the shared memory object
-    ptr = mmap(0, 1024, PROT_WRITE, MAP_SHARED, shm_fd, 0);
+    ptr = mmap(0, sizeof(Message4k), PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
     // sender initializes this memory, so I just map it (!)
 
