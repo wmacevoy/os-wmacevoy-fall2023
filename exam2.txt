@@ -1,0 +1,115 @@
+Exam 2
+
+Memory
+  Memory Structure
+     Process Layout
+     Q: What is the memory layout of a process?  Where is the kernel?
+        Why can't the process access the kernel memory directly?
+     Kernel Layout
+     Segment Registers
+     Q: What is the kind and purpose of common segment registers?
+     Security Measures
+     Q: What is the purpose of base address randomization?
+     Memory Mapping Unit
+     Q: What is crucial about the MMU for creating the idea of a process?
+     Pages - You must have hardware specific acceleration for looking up virtual addresses
+     as physical pages for the core active pages, otherwise you spend all your time looking
+     stuff up.
+     Q: Why is memory arranged in pages?
+     Page Table
+     Q: What is used to look up the physical address of a given virtual address
+     when a cache miss happens?
+
+  Cache
+     Miss
+     Q: Why is a cache miss so expensive?  Why isn't everything in cache?
+     Activate
+     Q: What activates a cache load?  Generally how does this happen?
+     Attack
+     Q: What can be done to mitigate a cache timing attack?
+     Performance
+     Q: Why do shared libraries boost performance from a cache point of view?
+
+  Swap
+     Virtual Memory
+     Q: Swap writes pages of process data to a block device or filesystem.
+        What are some security concerns about this?
+
+  Error Correcting Ram
+     Q: Why should servers use ECC ram?
+
+  Shared Memory
+      IPC
+      Posix API
+      Q: Give an application area where shared memory may be a good idea.
+
+  Shared Libraries
+    Q: Why do shared libraries improve system security?
+  Fork vs VFork
+    Q: When would vfork() vs fork() save a lot of memory resources?
+
+Filesystems
+  Block Devices
+     Magnetic
+     Q: Why does writing 0's to a block not "erase" a platter sector?
+     A: The magnitization is continuous (not discrete) and so there is a partial
+        memory of the previous states.  This is why secure erase programs do
+        multiple passes.
+     Solid State
+     Q: What happens when you write to a solid state drive?
+     Cloud
+
+  Stability
+     Journaling
+     Checkpoints
+     Raid (also performance)
+     Q: What is the purpose of Journaling?
+  Security
+     Encryption
+     Q: Why is encryption better than policies for security?
+     ACL’s
+     Q: Why are ACL's important for implementing the principle of least privilidge?
+  File Systems
+     Principle: NTFS, APFS, ext4 (fat32/vfat32)
+     Q: Why is fat32 / vfat32 a choice for cross-plaform file systems?
+  Tree vs. Graph
+     What is a reason recursive programs looking through filesystems may hang?
+  Soft vs Hard Link
+  API
+Security
+   Physical
+   Q: Why should servers be in a server room?
+   Encryption
+   Q: Why should laptops be full disk encrypted?
+   Policies
+   Q: Why should there be a root recovery key (managed by admins) to 
+      decrypt laptops from a sales team?
+
+   Hash
+   Q: What is a modern cryptographic hash?  What does it do?
+   Symmetric Key Encryption
+   Q: Why should you always prefer system libraries for encryption?
+   Public/Secret Key Encryption
+   Q: skip
+
+   Authentication types
+    Q: What are some "things you know" authifications?   "things you have" 
+    "things you are" 
+   Password Management
+     Q: Why are required password change times bad for security?
+   Access Control Lists
+     Q: See filesystems.
+
+   SUID
+     Q: Why are suid program necessary?  Why are they dangerous?
+   Secure coding and race conditions
+     Q: What is a better way to write:
+        if (allowed) {
+            take-admin-action();
+        }
+ Better 
+        try {
+          take-admin-action();
+        } catch (failures) {
+
+        }
