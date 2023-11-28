@@ -12,7 +12,7 @@ What are the principle resources that are managed by an operating system?
 3. Storage
 4  I/O
 
-What are the principle abstractions in an operaing sytem?
+What are the principle abstractions in an operaing system?
 
 1. Process [fund. memory abstraction]
 2. Thread [fund. cpu abstraction]
@@ -78,3 +78,25 @@ it can get in the way of a running process.  By looking at a table of saved stat
 choose what thread in which process runs next.  This is pulled off with a yeild() idea,
 which is weird like fork() because it does not have to return in the same thread or
 process.
+
+Q.  What is the output of
+
+-- fork() returns 0 to the child, and pid of child to the parent (assume it works)
+
+#include <unistd.h>
+int x = 1;
+pid_t parent_pid;
+pid_t child_pid;
+
+int main() {
+  parent_pid=getpid();
+  pit_t status=fork();
+  if (status > 0) {
+  // i am the parent
+    child_pid = status;
+  } else {
+  // i am the child
+    child_pid=getpid();
+   ...
+  }
+}
